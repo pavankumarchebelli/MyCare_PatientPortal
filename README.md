@@ -14,7 +14,7 @@ erDiagram
     LABCORP_LOCATION ||--o{ BOOKING : hosts
 
     PATIENT {
-        UUID id PK
+        UUID patientId PK
         string name
         string gender
         date dob
