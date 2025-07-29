@@ -81,13 +81,13 @@ Refer to previous messages for detailed `CREATE TABLE` SQL for each table with U
 
 ```mermaid
 graph TD
-  Client[User Interface / Postman] --> API_Gateway[API Gateway (Optional)]
+  Client[User Interface / Postman] --> API_Gateway["API Gateway (Optional)"]
 
   subgraph Services
-    PatientService[Patient Service]
-    LabcorpService[Labcorp Service]
-    BookingService[Booking Service]
-    GeoService[Geolocation Service (Optional)]
+    PatientService["Patient Service"]
+    LabcorpService["Labcorp Service"]
+    BookingService["Booking Service"]
+    GeoService["Geolocation Service (Optional)"]
   end
 
   API_Gateway --> PatientService
@@ -99,14 +99,15 @@ graph TD
   BookingService --> GeoService
 
   subgraph Databases
-    PatientDB[(PostgreSQL: patientdb)]
-    LabcorpDB[(PostgreSQL: labcorpdb)]
-    BookingDB[(PostgreSQL: bookingdb)]
+    PatientDB["PostgreSQL: patientdb"]
+    LabcorpDB["PostgreSQL: labcorpdb"]
+    BookingDB["PostgreSQL: bookingdb"]
   end
 
   PatientService --> PatientDB
   LabcorpService --> LabcorpDB
   BookingService --> BookingDB
+
 ```
 
 ---
@@ -115,13 +116,13 @@ graph TD
 
 ```mermaid
 graph TD
-  Controller[BookingController]
-  ServiceLayer[BookingService (Optional)]
-  Repo[BookingRepository]
-  RestClient1[RestTemplate: PatientService]
-  RestClient2[RestTemplate: LabcorpService]
-  GeoUtil[GeoUtils: Distance Logic]
-  DB[(PostgreSQL: bookingdb)]
+  Controller["BookingController"]
+  ServiceLayer["BookingService"]
+  Repo["BookingRepository"]
+  RestClient1["RestTemplate: PatientService"]
+  RestClient2["RestTemplate: LabcorpService"]
+  GeoUtil["GeoUtils (Distance Logic)"]
+  DB["PostgreSQL: bookingdb"]
 
   Controller --> ServiceLayer
   ServiceLayer --> Repo
