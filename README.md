@@ -84,19 +84,19 @@ graph TD
   Client[User Interface / Postman] --> API_Gateway["API Gateway (Optional)"]
 
   subgraph Services
-    PatientService["Patient Service"]
-    LabcorpService["Labcorp Service"]
-    BookingService["Booking Service"]
+    PatientApp["Patient Application"]
+    LabcorpApp["Labcorp Application"]
+    BookingApp["Booking Application (BookingController handles logic)"]
     GeoService["Geolocation Service (Optional)"]
   end
 
-  API_Gateway --> PatientService
-  API_Gateway --> LabcorpService
-  API_Gateway --> BookingService
+  API_Gateway --> PatientApp
+  API_Gateway --> LabcorpApp
+  API_Gateway --> BookingApp
 
-  BookingService --> PatientService
-  BookingService --> LabcorpService
-  BookingService --> GeoService
+  BookingApp --> PatientApp
+  BookingApp --> LabcorpApp
+  BookingApp --> GeoService
 
   subgraph Databases
     PatientDB["PostgreSQL: patientdb"]
@@ -104,9 +104,10 @@ graph TD
     BookingDB["PostgreSQL: bookingdb"]
   end
 
-  PatientService --> PatientDB
-  LabcorpService --> LabcorpDB
-  BookingService --> BookingDB
+  PatientApp --> PatientDB
+  LabcorpApp --> LabcorpDB
+  BookingApp --> BookingDB
+
 
 ```
 
@@ -117,19 +118,18 @@ graph TD
 ```mermaid
 graph TD
   Controller["BookingController"]
-  ServiceLayer["BookingService"]
   Repo["BookingRepository"]
   RestClient1["RestTemplate: PatientService"]
   RestClient2["RestTemplate: LabcorpService"]
   GeoUtil["GeoUtils (Distance Logic)"]
   DB["PostgreSQL: bookingdb"]
 
-  Controller --> ServiceLayer
-  ServiceLayer --> Repo
-  ServiceLayer --> RestClient1
-  ServiceLayer --> RestClient2
-  ServiceLayer --> GeoUtil
+  Controller --> Repo
+  Controller --> RestClient1
+  Controller --> RestClient2
+  Controller --> GeoUtil
   Repo --> DB
+
 ```
 
 ---
